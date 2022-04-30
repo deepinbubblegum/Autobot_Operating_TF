@@ -1,9 +1,10 @@
 import cv2
 import threading
 import time
-from modules.framesprocess import FramesProcess
-class MainController:
-    def __init__(self, frame, devices):
+from modules.framesmatch import FramesMatch
+from app_system.console import clear
+class MainFrameController:
+    def __init__(self, frame, devices, config):
         self.frame_ = frame
         self.devices = devices
         main_ctl_ = threading.Thread(target=self.update)
@@ -12,10 +13,10 @@ class MainController:
         self.device_name = None
         self.resolution = None
         self.frist_init = False
-        self.frame_process_ = FramesProcess()
+        self.frame_match_ = FramesMatch(config)
         
     def process(self, frame):
-        self.locations = self.frame_process_.matchTemplate(frame)
+        self.locations = self.frame_match_.matchTemplate(frame)
         for name, image_template, location in self.locations:
             location = list(zip(*location[::-1]))
             if location:
@@ -45,4 +46,6 @@ class MainController:
                         self.resolution = self.devices.resolution
                     self.process(self.frame)
             except Exception as e:
-                print(e)
+                # print('wait frame...')
+                # clear()
+                pass

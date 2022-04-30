@@ -1,0 +1,21 @@
+{
+    "#0001": {
+        "name": "ragnarok_labyrinth_nft",
+        "emu_support": [{
+                "emu_name": "LDPlayer",
+                "keyword": "ldp",
+                "version": [
+                    "4.0.81.0",
+                    "2.0.5"
+                ]
+            },
+            {
+                "emu_name": "BlueStacks",
+                "keyword": "bst",
+                "version": [
+                    "5.7.0.1064a"
+                ]
+            }
+        ]
+    }
+}

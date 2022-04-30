@@ -10,5 +10,5 @@ class Devices():
     def on_device_init(self):
         self.device_name = self.client.device_name
         self.resolution = self.client.resolution
-        print(self.device_name)
-        print(self.resolution)
+        # print(self.device_name)
+        print(f'resolution : {self.resolution}')

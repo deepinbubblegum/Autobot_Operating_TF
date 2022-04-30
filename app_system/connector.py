@@ -2,24 +2,22 @@ import json
 from adbutils import adb
 
 class Connections():
-    def __init__(self):
-        conf = open('config.json')
-        self.config = json.load(conf)
-        self.index_id = self.config["connect"]["Id"]
-        self.ip_port = f'{self.config["connect"]["IPaddress"]}:{self.config["connect"]["Port"]}'
+    def __init__(self, config):
+        self.index_id = config.config["index_id"]
+        self.ip_port = f'{config.config["ip_address"]}:{config.config["port"]}'
         self.connect()
         
     def connect(self):
         try:
             adb.connect(self.ip_port)
             self.devices = adb.device_list()
-        except:
-          print('error pless check config.json file or emulator')
+        except Exception as e:
+          print(e)
         finally:
             self.disconnect()
             
     def disconnect(self):
         try:
             adb.disconnect(self.ip_port)
-        except:
-            pass
+        except Exception as e:
+            print(e)
