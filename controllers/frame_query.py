@@ -3,7 +3,7 @@ import threading
 import time
 from modules.framesmatch import FramesMatch
 from app_system.console import clear
-class MainFrameController:
+class FrameQuery:
     def __init__(self, frame, devices, config):
         self.frame_ = frame
         self.devices = devices

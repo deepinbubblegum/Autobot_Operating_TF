@@ -7,9 +7,8 @@ class FramesMatch():
     def __init__(self, config):
         self.names_template = []
         self.images_template = []
-        # self.game_name = f'{config.source_game["game_name"]}-{config.source_game["game_name"]["ldplayer"]["keyword"]}'
-        # print(self.game_name)
-        self.directory = './resources/ragnarok_labyrinth_nft-ldp/*.jpg'
+        self.game_name = f'{config.config["emulator"]}/{config.source_game["game_name"]}'
+        self.directory = f'./resources/{self.game_name}/*.jpg'
         self.locations = []
         self.threshold = 0.005
         self.load_image()

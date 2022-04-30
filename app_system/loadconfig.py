@@ -8,7 +8,7 @@ class LoadConfig:
         self.source_game = None
         self.init_main_config()
         self.init_source_config()
-        
+        print(self.config["emulator"])
         if self.config["force_not_support"] is False:
             self.isSupport = False
             # check version emulator support
@@ -24,7 +24,7 @@ class LoadConfig:
                 exit(0)
         else:
             print("force support mode")
-            
+        print(self.source_game["game_name"])
     
     def init_main_config(self):
         config = json.load(open('config.json'))
