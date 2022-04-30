@@ -17,10 +17,10 @@ class LoadConfig:
                 if emulist["emu_name"] == self.config["emulator"]:
                     for emu_version in emulist["version"]:
                         if emu_version == version:
-                            print(f'this emulation version {version}')
+                            print(f'Emulator version {version}')
                             self.isSupport = True
             if self.isSupport is False:
-                print("this emulation version is not supported")
+                print("Emulator version not supported")
                 exit(0)
         else:
             print("force support mode")
