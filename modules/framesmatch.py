@@ -10,7 +10,7 @@ class FramesMatch():
         self.game_name = f'{config.config["emulator"]}/{config.source_game["game_name"]}'
         self.directory = f'./resources/{self.game_name}/*.jpg'
         self.locations = []
-        self.threshold = 0.005
+        self.threshold = config.source_game["threshold"]
         self.load_image()
         self.frist_math_gpu = True
     

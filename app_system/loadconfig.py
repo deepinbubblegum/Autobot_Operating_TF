@@ -51,11 +51,13 @@ class LoadConfig:
     def init_source_config(self):
         source_list = json.load(open('params/source_list.json'))
         name = source_list[self.config["source_game_id"]]["name"]
+        threshold = source_list[self.config["source_game_id"]]["threshold"]
         emulator_info = source_list[self.config["source_game_id"]]["emu_support"]
         emulist = []
         for emu in emulator_info:
             emulist.append(emu)
         self.source_game = {
             "game_name" : name,
+            "threshold" : threshold,
             "emulist": emulist
         }
