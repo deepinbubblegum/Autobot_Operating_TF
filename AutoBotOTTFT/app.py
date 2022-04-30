@@ -20,7 +20,6 @@ def appsys():
         config= config
     )
     client.start()
-   
 try:
     appsys()
 except Exception as err:
