@@ -1,6 +1,5 @@
-numpy==1.22.3
 opencv-contrib-python==4.5.5.64
 opencv-python==4.5.5.64
+pysondb==1.6.7
 pywin32==303
-scrcpy-client==0.2.2
-pysondb==1.6.1
+scrcpy-client==0.3.7
