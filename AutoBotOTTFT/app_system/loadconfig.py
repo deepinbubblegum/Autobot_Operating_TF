@@ -27,7 +27,7 @@ class LoadConfig:
         print(self.source_game["game_name"])
     
     def init_main_config(self):
-        config = json.load(open('config.json'))
+        config = json.load(open('config/userconfig.json'))
         # set variable
         index_id = config["connect"]["Index_emu"]
         ip_address = config["connect"]["IPaddress"]
