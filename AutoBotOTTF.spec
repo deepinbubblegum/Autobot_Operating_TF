@@ -1,7 +1,7 @@
 # -*- mode: python ; coding: utf-8 -*-
 import os
 
-block_cipher = pyi_crypto.PyiBlockCipher(key='0123456789ABCDEF')
+block_cipher = pyi_crypto.PyiBlockCipher(key='4E645267556B5870')
 
 directory = 'AutobotOTTF'
 
