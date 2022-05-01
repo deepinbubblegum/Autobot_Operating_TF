@@ -1,0 +1,12 @@
+{
+    "connect": {
+        "Index_emu": 0,
+        "emulator" : "LDPlayer",
+        "IPaddress": "127.0.0.1",
+        "Port": 5037,
+        "SourceGameId" : "#0001",
+        "GPU" : false,
+        "ForceNotSupport" : false,
+        "Debug" : false
+    }
+}
