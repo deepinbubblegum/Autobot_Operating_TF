@@ -1,14 +1,20 @@
 # -*- mode: python ; coding: utf-8 -*-
 
-
 block_cipher = None
 
+dir = 'AutobotOTTF'
 
 a = Analysis(
-    ['AutoBotOTTFT\\AutoBotOTTFT.py'],
+    [f'{dir}\\AutoBotOTTF.py'],
     pathex=[],
     binaries=[],
-    datas=[],
+    datas=[
+        (f'{dir}/library/scrcpy/*.jar', 'scrcpy'),
+        (f'{dir}/README.md', '.'),
+        (f'{dir}/config/*.json', 'config'),
+        (f'{dir}/params/*.json', 'params'),
+        (f'{dir}/resources/LDPlayer', 'resources/LDPlayer'),
+    ],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
@@ -19,6 +25,7 @@ a = Analysis(
     cipher=block_cipher,
     noarchive=False,
 )
+
 pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
 
 exe = EXE(
@@ -26,7 +33,7 @@ exe = EXE(
     a.scripts,
     [],
     exclude_binaries=True,
-    name='AutoBotOTTFT',
+    name='AutobotOTTF',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -38,6 +45,7 @@ exe = EXE(
     codesign_identity=None,
     entitlements_file=None,
 )
+
 coll = COLLECT(
     exe,
     a.binaries,
@@ -46,5 +54,5 @@ coll = COLLECT(
     strip=False,
     upx=True,
     upx_exclude=[],
-    name='AutoBotOTTFT',
+    name='autobot_OTTF',
 )
