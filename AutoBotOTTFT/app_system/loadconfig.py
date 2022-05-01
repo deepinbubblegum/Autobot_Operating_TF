@@ -1,6 +1,5 @@
 import json
-from app_system.emu_versions_check import get_version
-
+import sys
 class LoadConfig:
     def __init__(self):
         print("start load config...")
@@ -10,6 +9,7 @@ class LoadConfig:
         self.init_source_config()
         print(self.config["emulator"])
         if self.config["force_not_support"] is False:
+            from app_system.emu_versions_check import get_version
             self.isSupport = False
             # check version emulator support
             version = get_version(self.config["emulator"])
@@ -21,7 +21,7 @@ class LoadConfig:
                             self.isSupport = True
             if self.isSupport is False:
                 print("Emulator version not supported")
-                exit(0)
+                sys.exit(0)
         else:
             print("force support mode")
         print(self.source_game["game_name"])

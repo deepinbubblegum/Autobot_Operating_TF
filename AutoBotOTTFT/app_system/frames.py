@@ -1,6 +1,7 @@
 import cv2
 import scrcpy
 import glob
+import sys
 from collections import deque
 
 class Frames():
@@ -20,7 +21,7 @@ class Frames():
         key = cv2.waitKey(1)
         if key == 27:
             self.client_.client.stop()
-            exit(0)
+            sys.exit(0)
             
     def getFrame(self):
         return self.frames

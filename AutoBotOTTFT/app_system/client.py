@@ -1,4 +1,5 @@
 import scrcpy
+import sys
 from app_system.connector import Connections
 
 class Client():
@@ -11,4 +12,4 @@ class Client():
         
     def stop(self):
         self.client.stop()
-        exit(0)
+        sys.exit(0)

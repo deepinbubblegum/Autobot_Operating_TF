@@ -1,4 +1,5 @@
 import json
+import sys
 from win32api import *
 
 def get_version_number(file_path):
@@ -16,5 +17,5 @@ def get_version(emulator):
       return ".".join(get_version_number(file_path))
     except:
       print('please check config file "emu_path_file.json" in directory params')
-      exit(0)
+      sys.exit(0)
     
