@@ -1,7 +1,7 @@
 # -*- mode: python ; coding: utf-8 -*-
-# import sys
-# import os
-# sys.path.append(os.path.join(os.path.dirname(sys.argv[0]), "lib"))
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(sys.argv[0]), "lib"))
 
 block_cipher = None
 
