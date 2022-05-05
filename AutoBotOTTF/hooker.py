@@ -1,2 +1,0 @@
-import sys,os
-sys.path.append(os.path.join(os.path.dirname(sys.argv[0]), "lib"))
