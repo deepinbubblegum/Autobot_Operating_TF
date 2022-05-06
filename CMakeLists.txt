@@ -11,5 +11,5 @@ elseif(${CMAKE_SYSTEM_NAME} MATCHES Windows)
     add_definitions(-DCMAKEMACROSAMPLE="Windows PC")
 endif()
 
-add_subdirectory(AutoBuff)
+add_subdirectory(AutoBuff-GamePro)
 add_subdirectory(server)
