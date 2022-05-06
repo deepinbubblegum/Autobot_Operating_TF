@@ -1,5 +1,5 @@
 #include <server.hpp>
 
-void sayhello(){
-    std::cout << sayhello << std::endl;
+void server::sayhello(void){
+    std::cout << say_hello << std::endl;
 }

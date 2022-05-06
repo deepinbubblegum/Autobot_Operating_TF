@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.0.0)
 project(server)
 
-set(LIBRARY_OUTPUT_PATH  ${CMAKE_BINARY_DIR}/lib)
+set(LIBRARY_OUTPUT_PATH  ${CMAKE_BINARY_DIR}/server)
 
-include_directories(${server_SOURCE_DIR}/include)
-add_library(server SHARED src/server.cpp)
+add_library(server STATIC src/server.cpp)
+target_include_directories(server PUBLIC include)

@@ -3,7 +3,7 @@
 class server
 {
 private:
-    std::string sayhello = "hello dll";
+    std::string say_hello = "hello dll";
 public:
-    void sayhello();
+    void sayhello(void);
 };
