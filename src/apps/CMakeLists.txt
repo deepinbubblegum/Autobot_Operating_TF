@@ -1,1 +1,2 @@
-add_executable(autobot_otf app.cpp)
+add_executable(apps apps.cpp)
+target_link_libraries(apps server)
