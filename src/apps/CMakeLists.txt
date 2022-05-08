@@ -1,0 +1,1 @@
+add_executable(autobot_otf app.cpp)
