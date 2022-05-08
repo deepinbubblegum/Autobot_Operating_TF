@@ -1,2 +1,2 @@
 add_subdirectory(apps)
-add_subdirectory(module_server)
+add_subdirectory(server)

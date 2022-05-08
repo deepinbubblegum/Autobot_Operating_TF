@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.0.0)
+project(server)
+set(LIB_NAME server)
+add_library(${LIB_NAME} SHARED src/server.cpp)
+target_include_directories(${LIB_NAME} PUBLIC include)
+install(TARGETS ${LIB_NAME} DESTINATION lib)
