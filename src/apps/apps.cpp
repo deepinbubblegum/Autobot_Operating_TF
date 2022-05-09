@@ -5,8 +5,7 @@
 using namespace std;
 int main(int, char**) {
     adb adb_;
-    adb_.get_device_name();
-    
+    adb_.start();
 
     // Press any key to continue...
     // #ifdef _WIN32
