@@ -26,10 +26,11 @@ bool adb::get_device_name(){
     return false;
 }
 
-string adb::exec(const char* origin_cmd) {
+string adb::exec(string origin_cmd) {
+    const char* char_cmd = origin_cmd.c_str();
     char buffer[128];
     std::string result = "";
-    FILE* pipe = popen(origin_cmd, "r");
+    FILE* pipe = popen(char_cmd, "r");
     if (!pipe) throw std::runtime_error("popen() failed!");
     try {
         while (fgets(buffer, sizeof buffer, pipe) != NULL) {
@@ -41,4 +42,15 @@ string adb::exec(const char* origin_cmd) {
     }
     pclose(pipe);
     return result;
+}
+
+bool adb::push_server_to_device(string server_path){
+    string cmd = "adb -s " + device_name_list[index_device] + " push " + server_path + " " + server_device_path;
+    string result = exec(cmd);
+    regex result_rule("pushed");
+    cmatch m;
+    if(!regex_search(result.c_str(), m, result_rule)){
+        return false;
+    }
+    return true;
 }
