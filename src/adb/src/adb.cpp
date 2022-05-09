@@ -17,6 +17,7 @@ bool adb::get_device_name(){
             device_name_list.push_back(device_name);
         }
         if (!device_name_list.empty()){
+            cout << "######## Devices list ########" << endl;
             for(string device_name : device_name_list)
                 cout << device_name << endl;
             return true;
