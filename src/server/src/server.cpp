@@ -126,9 +126,9 @@ bool server::start_run_in_device(){
         system(cmd_use.c_str());
     };
     _device_server_thread = thread(tmp, cmd);
-    string id ="127.0.0.1";
-    string port = "27183";
-    if(!video_socket_init(id, port)){
+    // string id = _ip;
+    // string port = _port;
+    if(!video_socket_init(_ip, _port)){
         return false;
     }
     ifstream terminal_out("temp.txt");
@@ -165,6 +165,7 @@ bool server::stop_device(){
 
 bool server::adb_kill(){
     system("adb kill-server");
+    return true;
 }
 
 bool server::remove_server_from_device(string server_path){
