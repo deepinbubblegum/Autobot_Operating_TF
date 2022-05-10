@@ -73,6 +73,50 @@ bool adb::reverse_config(string domain_socket_name, string local_port){
     return true;
 }
 
+bool adb::video_socket_init(string id,string port){
+    assert(! (id.empty() || port.empty()));
+    // winsock
+    cout << "Initialising Winsock..." << endl;
+    if (WSAStartup(MAKEWORD(2,2),&wsa) != 0){
+        cout << "Failed. Error Code : " << WSAGetLastError() << endl;
+        return false;
+    }
+	cout << "Initialised." << endl;
+    _socket_fd = socket(PF_INET , SOCK_STREAM, 0);
+    if((_socket_fd < 0))
+	{
+		cout << "Could not create socket : " << WSAGetLastError() << endl;
+        return false;
+	}
+    cout << "Socket created." << endl;
+
+    struct sockaddr_in serv_addr;
+    serv_addr.sin_family = AF_INET;
+    serv_addr.sin_port = htons(atoi(port.c_str()));
+    serv_addr.sin_addr.s_addr = inet_addr("127.0.0.1");
+    char opt = 1;
+    setsockopt(_socket_fd,SOL_SOCKET,SO_REUSEADDR,&opt,sizeof(opt));
+
+    if(bind(_socket_fd, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0){
+        cout << "bind failed" << endl;
+        return false;
+    }
+
+    if(listen(_socket_fd, 10) < 0){
+        cout << "Monitoring failed" << endl;
+        return false;
+    }
+    struct sockaddr_in client_addr;
+    socklen_t client_addrlength = sizeof(client_addr);
+    _video_socket = accept(_socket_fd, (struct sockaddr*)&client_addr, &client_addrlength); //connect socket
+    if(_video_socket < 0){
+        cout << "Socket get failed" << endl;
+        return false;
+    }
+    cout << "Video socket initialized successfully"<< endl << "The connection client id is:" << inet_ntoa(client_addr.sin_addr) << endl;
+    return true;
+}
+
 bool adb::start_device(){
     string cmd = "adb -s "+ device_name_list[index_device] 
     + " shell CLASSPATH=/data/local/tmp/scrcpy-server app_process \
@@ -82,19 +126,41 @@ bool adb::start_device(){
         system(cmd_use.c_str());
     };
     _device_server_thread = thread(tmp, cmd);
-    
-    // ยังไม่เสร็จ
+    string id ="127.0.0.1";
+    string port = "27183";
+    if(!video_socket_init(id, port)){
+        return false;
+    }
+    ifstream terminal_out("temp.txt");
+    string terminal_result;
+    string tmps;
+    while(getline(terminal_out,tmps)){
+        terminal_result += "\n" + tmps;
+    }
+    system("del /s temp.txt"); 
+    cout << terminal_result << endl;
+    regex result_rule("ERROR");
+    cmatch m;
+    if(regex_search(terminal_result.c_str(), m, result_rule)){
+        return false;
+    }
     return true;
 }
 
 bool adb::stop_device(){
-    string cmd = "adb -s "+ device_name_list[index_device]  +  " shell ps | grep app_process";
+    string cmd = "adb -s "+ device_name_list[index_device]  +  " shell ps | findstr app_process";
     cout << cmd << endl;
     string t_out = run_exec(cmd);
-}
-
-int adb::get_socket(){
-    return _socket;
+    regex pid_rule("[0-9]+");
+    cmatch m;
+    vector<string> pid_list;
+    regex_search(t_out.c_str(), m, pid_rule);
+    string pid = m.str();
+    cmd = "adb -s "+ device_name_list[index_device]  +  " shell kill -9 " + pid;
+    system(cmd.c_str());
+    shutdown(_video_socket, SD_BOTH);
+    shutdown(_socket_fd, SD_BOTH);
+    return true;
 }
 
 bool adb::start(){
@@ -102,4 +168,8 @@ bool adb::start(){
     push_server_to_device(server_path_file);
     reverse_config("localabstract:scrcpy","tcp:" + _port);
     return true;
+}
+
+int adb::get_socket(){
+    return _video_socket;
 }
