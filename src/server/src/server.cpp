@@ -201,7 +201,7 @@ bool server::aftermath(){
     return ret;
 }
 
-bool server::start(){
+bool server::start_step(){
     switch (_server_stat){
         case INIT_STAT:{
             if(!get_device_name())

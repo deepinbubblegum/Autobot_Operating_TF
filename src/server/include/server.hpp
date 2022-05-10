@@ -62,5 +62,5 @@ private:
 	SOCKET s;
 public:
     int get_socket();
-    bool start();
+    bool start_step();
 };
