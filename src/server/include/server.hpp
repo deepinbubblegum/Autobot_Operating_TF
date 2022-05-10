@@ -51,7 +51,6 @@ private:
     bool push_server_to_device(string server_path);
     bool reverse_config(string domain_socket_name, string local_port);
     bool start_run_in_device();
-    bool stop_device();
     bool video_socket_init(string id,string port);
     bool aftermath();
     bool remove_server_from_device(string server_path);
@@ -63,4 +62,6 @@ private:
 public:
     int get_socket();
     bool start_step();
+    bool stop_device();
+    bool adb_kill();
 };

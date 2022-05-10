@@ -163,6 +163,10 @@ bool server::stop_device(){
     return true;
 }
 
+bool server::adb_kill(){
+    system("adb kill-server");
+}
+
 bool server::remove_server_from_device(string server_path){
     string cmd = "adb -s " + device_name_list[index_device] + " shell rm -rf " + server_path;
     system(cmd.c_str());
@@ -221,7 +225,7 @@ bool server::start_step(){
             _server_stat = RUN_SUCCESS;
         }
     }
-    return true;
+    return aftermath();
 }
 
 int server::get_socket(){
