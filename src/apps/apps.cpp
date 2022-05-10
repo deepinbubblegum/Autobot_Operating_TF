@@ -1,11 +1,10 @@
 #include <iostream>
 #include <server.hpp>
-#include <adb.hpp>
 
 using namespace std;
 int main(int, char**) {
-    adb adb_;
-    adb_.start();
+    server _server;
+    _server.start();
 
     // Press any key to continue...
     // #ifdef _WIN32
