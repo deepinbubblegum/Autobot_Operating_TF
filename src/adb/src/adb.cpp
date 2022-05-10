@@ -117,7 +117,7 @@ bool adb::video_socket_init(string id,string port){
     return true;
 }
 
-bool adb::start_device(){
+bool adb::start_run_in_device(){
     string cmd = "adb -s "+ device_name_list[index_device] 
     + " shell CLASSPATH=/data/local/tmp/scrcpy-server app_process \
     / com.genymobile.scrcpy.Server 1.14 info " + to_string(_resolution) + " " + to_string(_bitrate) +
@@ -163,10 +163,64 @@ bool adb::stop_device(){
     return true;
 }
 
+bool adb::remove_server_from_device(string server_path){
+    string cmd = "adb -s " + device_name_list[index_device] + " shell rm -rf " + server_path;
+    system(cmd.c_str());
+    return true;
+}
+
+bool adb::remove_reverse(string domain){
+    string cmd = "adb -s " + device_name_list[index_device] + " reverse --remove domain";
+    system(cmd.c_str());
+    return true;
+}
+
+bool adb::aftermath(){
+    bool ret = false;
+    switch(_server_stat){
+        case INIT_STAT:
+            break;
+        case PUSH_SUCCESS:{
+            remove_server_from_device("/data/local/tmp/scrcpy-server");
+            break;
+        }
+        case REVERSE_SUCCESS:{
+            remove_server_from_device("/data/local/tmp/scrcpy-server");
+            remove_reverse("localabstract:scrcpy");
+            break;
+        }
+        case RUN_SUCCESS:{
+            /*
+            remove_server_from_device("/data/local/tmp/scrcpy-server");
+            remove_reverse("localabstract:scrcpy");
+            */
+            ret = true;
+            break;
+        }
+    }
+    return ret;
+}
+
 bool adb::start(){
-    get_device_name();
-    push_server_to_device(server_path_file);
-    reverse_config("localabstract:scrcpy","tcp:" + _port);
+    switch (_server_stat){
+        case INIT_STAT:{
+            if(!get_device_name())
+                break;
+            if(!push_server_to_device(server_path_file))
+                break;
+            _server_stat = PUSH_SUCCESS;
+        }
+        case PUSH_SUCCESS:{
+            if (!reverse_config("localabstract:scrcpy","tcp:" + _port))
+                break;
+            _server_stat = REVERSE_SUCCESS;
+        }
+        case REVERSE_SUCCESS:{
+            if(!start_run_in_device())
+                break;
+            _server_stat = RUN_SUCCESS;
+        }
+    }
     return true;
 }
 

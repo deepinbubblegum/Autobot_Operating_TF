@@ -41,18 +41,21 @@ private:
     // method
     string run_exec(string origin_cmd);
     enum ServerStat{
-        INIT_STAT,                        //初始状态
-        PUSH_SUCCESS,                  //成功推送服务端到手机
-        REVERSE_SUCCESS,        //成功 启动反向代理
-        RUN_SUCCESS                      //服务端程序已经在手机上运行
+        INIT_STAT,                //initial state
+        PUSH_SUCCESS,            //Successfully push the server to the mobile phone
+        REVERSE_SUCCESS,        //Successfully start reverse proxy
+        RUN_SUCCESS            //The server program is already running on the phone
     };
     ServerStat _server_stat = INIT_STAT;
     bool get_device_name();
     bool push_server_to_device(string server_path);
     bool reverse_config(string domain_socket_name, string local_port);
-    bool start_device();
+    bool start_run_in_device();
     bool stop_device();
     bool video_socket_init(string id,string port);
+    bool aftermath();
+    bool remove_server_from_device(string server_path);
+    bool remove_reverse(string domain);
 
     // winsock
     WSADATA wsa;
