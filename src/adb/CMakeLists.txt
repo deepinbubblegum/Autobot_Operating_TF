@@ -1,5 +1,0 @@
-cmake_minimum_required(VERSION 3.0.0)
-project(adb)
-set(LIB_NAME adb)
-add_library(${LIB_NAME} SHARED src/adb.cpp)
-target_include_directories(${LIB_NAME} PUBLIC include)

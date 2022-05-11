@@ -1,12 +1,12 @@
 #include <iostream>
 #include <server.hpp>
-#include <adb.hpp>
 
 using namespace std;
 int main(int, char**) {
-    adb adb_;
-    adb_.get_device_name();
-    
+    server _server;
+    _server.start_step();
+    cout << _server.get_socket() << endl;
+    // _server.stop_device();
 
     // Press any key to continue...
     // #ifdef _WIN32
