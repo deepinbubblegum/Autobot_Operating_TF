@@ -3,9 +3,9 @@
 
 using namespace std;
 int main(int, char**) {
-    server _server;
-    _server.start_step();
-    cout << _server.get_socket() << endl;
+    // server _server;
+    // _server.start_step();
+    // cout << _server.get_socket() << endl;
     // _server.stop_device();
 
     // Press any key to continue...
@@ -14,4 +14,5 @@ int main(int, char**) {
     // #elif __linux__
     //     system("read");
     // #endif
+    return 0;
 }
