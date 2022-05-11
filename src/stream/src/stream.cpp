@@ -36,12 +36,13 @@ bool Stream::get_device_info(){
     // strcpy is safe here, since name contains at least DEVICE_NAME_FIELD_LENGTH bytes
     // and strlen(buf) < DEVICE_NAME_FIELD_LENGTH
     _device_name = (char *)buf.data();
-
-    // // bug 
-    // for(char a : buf){
-    //     bitset<8> x(a);
-    //     cout << x << '\n';
-    // }
+    // int bit_low = (buf[DEVICE_NAME_FIELD_LENGTH] << 8) | buf[DEVICE_NAME_FIELD_LENGTH + 1];
+    // bitset<8> x(bit_low);
+    // cout << x << '\n';
+    // // for(char a : buf){
+    // //     bitset<8> x(a);
+    // //     cout << x << '\n';
+    // // }
     // _resolution_width = (buf[DEVICE_NAME_FIELD_LENGTH] << 8) | buf[DEVICE_NAME_FIELD_LENGTH + 1];
     // _resolution_height = (buf[DEVICE_NAME_FIELD_LENGTH + 2] << 8) | buf[DEVICE_NAME_FIELD_LENGTH + 3];
     // cout << "Device name:"<< _device_name << endl;
