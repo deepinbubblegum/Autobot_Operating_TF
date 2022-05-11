@@ -1,8 +1,13 @@
 cmake_minimum_required(VERSION 3.0.0)
 project(stream)
+
+find_package( OpenCV REQUIRED )
+include_directories( ${OpenCV_INCLUDE_DIRS} )
+
 set(LIB_NAME stream)
-add_library(${LIB_NAME} SHARED src/stream.cpp)
+add_library(${LIB_NAME} SHARED src/stream.cpp src/frame_buffer.cpp)
 target_include_directories(${LIB_NAME} PUBLIC include)
+target_link_libraries( ${LIB_NAME} ${OpenCV_LIBS} )
 if(WIN32)
     find_library(WSOCK32_LIBRARY wsock32)
     find_library(WS2_32_LIBRARY ws2_32)

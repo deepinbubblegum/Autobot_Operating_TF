@@ -1,6 +1,6 @@
 #include <server.hpp>
 
-bool server::get_device_name(){
+bool Server::get_device_name(){
     if (s_adbPath.empty()){
         exec_result = run_exec("adb devices");
         regex devices_name_rule("[^\r\n]+\\s");
@@ -26,7 +26,7 @@ bool server::get_device_name(){
     return false;
 }
 
-string server::run_exec(string origin_cmd) {
+string Server::run_exec(string origin_cmd) {
     const char* char_cmd = origin_cmd.c_str();
     char buffer[128];
     std::string result = "";
@@ -44,7 +44,7 @@ string server::run_exec(string origin_cmd) {
     return result;
 }
 
-bool server::push_server_to_device(string server_path){
+bool Server::push_server_to_device(string server_path){
     string cmd = "adb -s " + device_name_list[index_device] + " push " + server_path + " " + server_device_path;
     cout << cmd << endl;
     string result = run_exec(cmd);
@@ -57,7 +57,7 @@ bool server::push_server_to_device(string server_path){
     return true;
 }
 
-bool server::reverse_config(string domain_socket_name, string local_port){
+bool Server::reverse_config(string domain_socket_name, string local_port){
     string cmd ="adb -s " + device_name_list[index_device] + " reverse "  
         + domain_socket_name + " " + local_port;
     cout << cmd << endl;
@@ -73,7 +73,7 @@ bool server::reverse_config(string domain_socket_name, string local_port){
     return true;
 }
 
-bool server::video_socket_init(string id,string port){
+bool Server::video_socket_init(string id,string port){
     assert(! (id.empty() || port.empty()));
     // winsock
     cout << "Initialising Winsock..." << endl;
@@ -117,7 +117,7 @@ bool server::video_socket_init(string id,string port){
     return true;
 }
 
-bool server::start_run_in_device(){
+bool Server::start_run_in_device(){
     string cmd = "adb -s "+ device_name_list[index_device] 
     + " shell CLASSPATH=/data/local/tmp/scrcpy-server app_process \
     / com.genymobile.scrcpy.Server 1.14 info " + to_string(_resolution) + " " + to_string(_bitrate) +
@@ -147,7 +147,7 @@ bool server::start_run_in_device(){
     return true;
 }
 
-bool server::stop_device(){
+bool Server::stop_device(){
     string cmd = "adb -s "+ device_name_list[index_device]  +  " shell ps | findstr app_process";
     cout << cmd << endl;
     string t_out = run_exec(cmd);
@@ -160,27 +160,28 @@ bool server::stop_device(){
     system(cmd.c_str());
     shutdown(_video_socket, SD_BOTH);
     shutdown(_socket_fd, SD_BOTH);
+    adb_kill();
     return true;
 }
 
-bool server::adb_kill(){
+bool Server::adb_kill(){
     system("adb kill-server");
     return true;
 }
 
-bool server::remove_server_from_device(string server_path){
+bool Server::remove_server_from_device(string server_path){
     string cmd = "adb -s " + device_name_list[index_device] + " shell rm -rf " + server_path;
     system(cmd.c_str());
     return true;
 }
 
-bool server::remove_reverse(string domain){
+bool Server::remove_reverse(string domain){
     string cmd = "adb -s " + device_name_list[index_device] + " reverse --remove domain";
     system(cmd.c_str());
     return true;
 }
 
-bool server::aftermath(){
+bool Server::aftermath(){
     bool ret = false;
     switch(_server_stat){
         case INIT_STAT:
@@ -206,7 +207,7 @@ bool server::aftermath(){
     return ret;
 }
 
-bool server::start_step(){
+bool Server::start_step(){
     switch (_server_stat){
         case INIT_STAT:{
             if(!get_device_name())
@@ -229,6 +230,6 @@ bool server::start_step(){
     return aftermath();
 }
 
-int server::get_socket(){
+int Server::get_socket(){
     return _video_socket;
 }
