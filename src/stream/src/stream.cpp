@@ -22,12 +22,12 @@ bool Stream::stream_init(int video_socket){
 
 //The socket establishment only obtains the device information at the beginning
 bool Stream::get_device_info(){
-    // char buf[DEVICE_NAME_FIELD_LENGTH + 4];
+    unsigned char buf[DEVICE_NAME_FIELD_LENGTH + 4];
     // int buflen;
     // buflen = strlen(buf);
-    int size_buff = DEVICE_NAME_FIELD_LENGTH + 4;
-    vector<char> buf(size_buff);
-    int n = recv(_video_socket, buf.data(), size_buff, 0);
+    // int size_buff = DEVICE_NAME_FIELD_LENGTH + 4;
+    // vector<char> buf(size_buff);
+    int n = recv(_video_socket, (char *)&buf, sizeof(buf), 0);
     if(n != DEVICE_NAME_FIELD_LENGTH + 4){
         cout << "Failed to get device info" << endl;
         return false;
@@ -35,17 +35,10 @@ bool Stream::get_device_info(){
     buf[DEVICE_NAME_FIELD_LENGTH - 1] = '\0'; // in case the client sends garbage
     // strcpy is safe here, since name contains at least DEVICE_NAME_FIELD_LENGTH bytes
     // and strlen(buf) < DEVICE_NAME_FIELD_LENGTH
-    _device_name = (char *)buf.data();
-    // int bit_low = (buf[DEVICE_NAME_FIELD_LENGTH] << 8) | buf[DEVICE_NAME_FIELD_LENGTH + 1];
-    // bitset<8> x(bit_low);
-    // cout << x << '\n';
-    // // for(char a : buf){
-    // //     bitset<8> x(a);
-    // //     cout << x << '\n';
-    // // }
-    // _resolution_width = (buf[DEVICE_NAME_FIELD_LENGTH] << 8) | buf[DEVICE_NAME_FIELD_LENGTH + 1];
-    // _resolution_height = (buf[DEVICE_NAME_FIELD_LENGTH + 2] << 8) | buf[DEVICE_NAME_FIELD_LENGTH + 3];
-    // cout << "Device name:"<< _device_name << endl;
-    // cout << "Resolution    :" << _resolution_width << " * "  << _resolution_height << endl;
+    _device_name = (char *)buf;
+    _resolution_width = (buf[DEVICE_NAME_FIELD_LENGTH] << 8) | buf[DEVICE_NAME_FIELD_LENGTH + 1];
+    _resolution_height = (buf[DEVICE_NAME_FIELD_LENGTH + 2] << 8) | buf[DEVICE_NAME_FIELD_LENGTH + 3];
+    cout << "Device name:"<< _device_name << endl;
+    cout << "Resolution    :" << _resolution_width << " * "  << _resolution_height << endl;
     return true;
 }
