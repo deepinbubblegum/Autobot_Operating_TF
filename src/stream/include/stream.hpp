@@ -53,7 +53,7 @@ private:
 
     int _video_socket;
     string _device_name;
-    int _resolution_width,_resolution_height;
+    int _resolution_width, _resolution_height;
 
     AVCodec* _codec = nullptr;                  //decoder
     AVCodecContext* _codec_context= nullptr;   //Decoder context
