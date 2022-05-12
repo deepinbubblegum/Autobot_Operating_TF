@@ -2,6 +2,7 @@
 #include <chrono>
 #include <thread>
 #include <bitset>
+#include <opencv2/opencv.hpp>
 
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
@@ -15,7 +16,7 @@
 extern "C"{
     #include <libavformat/avformat.h>
     #include <libavcodec/avcodec.h>
-    #include <libswscale/swscale.h>   
+    #include <libswscale/swscale.h> 
 }
 #define NO_PTS UINT64_MAX
 #define HEADER_SIZE 12
@@ -34,6 +35,7 @@ public:
     bool stop_frame_creat();
     //For external image processing thread to get image
     bool get_img(cv::Mat& mat_out);
+
 private:
     bool ffmpeg_init();
     bool decoder_init();
@@ -61,7 +63,6 @@ private:
     bool _need_stop;
     //The header information of a single packet of data will be called frequently, in order to avoid wasting memory allocation time and allocate it in advance
     unsigned char _header[HEADER_SIZE];
-    
     //h264 data packets need to be spliced, use this information to record whether splicing is required
     bool _has_pending = false;
     //Buffer to use when stitching is required
@@ -69,7 +70,7 @@ private:
     //yuv whole frame information
     AVFrame* _yuv_frame = nullptr;
     
-    FrameBuffer  _frame_buffer;
+    FrameBuffer _frame_buffer;
 
     //data receiving thread
     thread _recv_thread;
