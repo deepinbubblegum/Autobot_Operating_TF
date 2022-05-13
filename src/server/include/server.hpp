@@ -32,8 +32,8 @@ private:
     string _port = "27183";
 
     // device config and server
-    int _bitrate = 200000000; // default 200000000
-    int _resolution = 1280; // default 720
+    int _bitrate = 100000000; // default 200000000
+    int _resolution = 720; // default 720
     thread _device_server_thread;
     int _video_socket;        //connect socket
     int _socket_fd;     //listen socket

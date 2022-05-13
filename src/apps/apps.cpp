@@ -10,23 +10,16 @@ int main(int, char**) {
     server.start_step();
     Stream stream;
     stream.stream_init(server.get_socket());
-    // this_thread::sleep_for(chrono::seconds(5));
     cv::Mat src;
     while(true){
         if(!stream.get_img(src))
             break;
-        cv::imshow("origin", src);
-        int key = cv::waitKey(1);
+        cv::imshow("preview", src);
+        int key = cv::waitKey(20);
         if (key == 28)
             break;
     }
+    cv::destroyAllWindows();
     server.stop_device();
-
-    // Press any key to continue...
-    // #ifdef _WIN32
-    //     system("pause");
-    // #elif __linux__
-    //     system("read");
-    // #endif
     return 0;
 }
