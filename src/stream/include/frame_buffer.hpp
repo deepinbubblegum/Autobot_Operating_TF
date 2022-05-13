@@ -1,3 +1,5 @@
+#ifndef FRAME_BUFFER_H
+#define FRAME_BUFFER_H
 #include <iostream>
 #include <chrono>
 #include <opencv2/opencv.hpp>
@@ -11,6 +13,7 @@ class FrameBuffer
 {
 public:
     bool init(int height,int width);
+    unsigned char* get_buffer();
     enum ReadMode{
         IN_ORDER, //sequential read
         REAL_TIME //real-time priority, read the latest, and move the pointer to ignore what was produced earlier
@@ -39,3 +42,4 @@ private:
     int _read_point = -1,_write_point=0;
     chrono::high_resolution_clock::time_point _this_time,_last_time;
 };
+#endif // !FRAME_BUFFER_H

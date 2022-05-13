@@ -14,6 +14,18 @@ bool FrameBuffer::init(int height, int width)
     return true;
 }
 
+//return the allocated,pointer to the memory that should currently be used
+unsigned char* FrameBuffer::get_buffer(){
+    unique_lock<mutex> lock(_buffer_info_lock);
+    //after calling the function,The external decoding thread will write the decoded content to the buffer,This memory is not available for image processing at this time
+    assert(_buffer[_write_point] != nullptr);
+    //Write the next buffer when the write buffer coincides with the buffer the reader is using
+    if(_write_point == _read_point){
+        _write_point = (_write_point+1)%BUFFER_LEN;
+    }
+    return _buffer[_write_point];
+}
+
 int FrameBuffer::get_useful_frame_number(){
     int len = 0;
     for(int i=0;i<BUFFER_LEN;++i){
