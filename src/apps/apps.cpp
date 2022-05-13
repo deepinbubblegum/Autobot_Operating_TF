@@ -15,8 +15,8 @@ int main(int, char**) {
         if(!stream.get_img(src))
             break;
         cv::imshow("preview", src);
-        int key = cv::waitKey(20);
-        if (key == 28)
+        char key = cv::waitKey(30);
+        if(key == 27)
             break;
     }
     cv::destroyAllWindows();
