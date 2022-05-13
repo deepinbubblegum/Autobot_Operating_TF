@@ -8,9 +8,18 @@ using namespace std;
 int main(int, char**) {
     Server server;
     server.start_step();
-    Stream video_stream;
-    video_stream.stream_init(server.get_socket());
-    this_thread::sleep_for(chrono::seconds(5));
+    Stream stream;
+    stream.stream_init(server.get_socket());
+    // this_thread::sleep_for(chrono::seconds(5));
+    cv::Mat src;
+    while(true){
+        if(!stream.get_img(src))
+            break;
+        cv::imshow("origin", src);
+        int key = cv::waitKey(1);
+        if (key == 28)
+            break;
+    }
     server.stop_device();
 
     // Press any key to continue...
