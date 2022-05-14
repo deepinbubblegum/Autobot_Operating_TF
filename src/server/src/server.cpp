@@ -160,7 +160,7 @@ bool Server::stop_device(){
     system(cmd.c_str());
     shutdown(_video_socket, SD_BOTH);
     shutdown(_socket_fd, SD_BOTH);
-    adb_kill();
+    // adb_kill();
     return true;
 }
 
