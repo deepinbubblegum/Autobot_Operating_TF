@@ -22,14 +22,14 @@ private:
     string s_adbPath;
     string exec_result;
     vector<string> device_name_list;
-    int index_device = 0;
+    int index_device = 1;
 
     // path scrcpy
     string server_path_file = "scrcpy-server/scrcpy-server";
     string server_device_path = "/data/local/tmp/scrcpy-server";
 
     string _ip ="127.0.0.1";    //default ip loop back
-    string _port = "30000";
+    string _port = "20000";
 
     // device config and server
     int _bitrate = 100000000; // default 200000000
@@ -60,6 +60,7 @@ private:
     WSADATA wsa;
 	SOCKET s;
 public:
+    bool setDevice(int device_id, string port);
     int get_socket();
     bool start_step();
     bool stop_device();

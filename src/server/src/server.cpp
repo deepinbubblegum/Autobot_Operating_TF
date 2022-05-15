@@ -117,6 +117,12 @@ bool Server::video_socket_init(string id,string port){
     return true;
 }
 
+bool Server::setDevice(int device_id, string port){
+    index_device = device_id;
+    _port = port;
+    return true;
+}
+
 bool Server::start_run_in_device(){
     string cmd = "adb -s "+ device_name_list[index_device] 
     + " shell CLASSPATH=/data/local/tmp/scrcpy-server app_process \
