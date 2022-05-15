@@ -1,6 +1,4 @@
 #include <iostream>
-#include <windows.h>
-#include <strsafe.h>
 
 // Constant
 #define BUFSIZE 4096
@@ -10,5 +8,5 @@ class Controller
 private:
     /* data */
 public:
-    // variables
+    void exec();
 };
