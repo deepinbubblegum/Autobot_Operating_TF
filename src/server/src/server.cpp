@@ -239,3 +239,7 @@ bool Server::start_step(){
 int Server::get_socket(){
     return _video_socket;
 }
+
+vector<string> Server::getDevice_list(){
+    return device_name_list;
+}

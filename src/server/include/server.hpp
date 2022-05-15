@@ -61,6 +61,7 @@ private:
 	SOCKET s;
 public:
     bool setDevice(int device_id, string port);
+    vector<string> getDevice_list();
     int get_socket();
     bool start_step();
     bool stop_device();
