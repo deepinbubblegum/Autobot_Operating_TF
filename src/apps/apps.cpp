@@ -4,8 +4,6 @@
 #include <controller.hpp>
 #include <chrono>
 #include <thread>
-#include <fstream>
-#include <yaml-cpp/yaml.h>
 
 using namespace std;
 // int main(int, char**) {
@@ -29,12 +27,6 @@ using namespace std;
 // }
 
 int main(int argc,char** argv) {
-    YAML::Node config;
-    config = YAML::LoadFile("./config/config.yaml");
-    string emu = config["UserConfig"]["Emu"].as<string>();
-    cout << emu << endl;
-
-
     Server server;
     int deviceID = 0;
     string devicePort = "2000";

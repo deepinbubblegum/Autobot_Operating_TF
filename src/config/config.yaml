@@ -1,6 +1,6 @@
 UserConfig:
   Id: 0
-  Port:  2000
-  Emu: "BlueStacks"
+  Port: 2000
+  Emu: 0
   GameId: 0
   GPU: false

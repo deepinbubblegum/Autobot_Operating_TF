@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.0.0)
+project(autoloader)
+set(LIB_NAME autoloader)
+add_library(${LIB_NAME} SHARED src/autoloader.cpp)
+target_link_libraries(${LIB_NAME} yaml-cpp)
+target_include_directories(${LIB_NAME} PUBLIC include)
