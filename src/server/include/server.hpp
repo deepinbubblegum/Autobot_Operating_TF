@@ -60,7 +60,7 @@ private:
     WSADATA wsa;
 	SOCKET s;
 public:
-    bool setDevice(int device_id, string port);
+    bool setDevice(int device_id, string ip_address, string port, int bitrate, int resolution);
     vector<string> getDevice_list();
     int get_socket();
     bool start_step();

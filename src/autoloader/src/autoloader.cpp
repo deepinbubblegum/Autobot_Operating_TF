@@ -10,7 +10,10 @@ bool Autoloader::loadUserConfig(){
     }
 
     Id = config["UserConfig"]["Id"].as<int>();
+    IPaddress = config["UserConfig"]["IPaddress"].as<string>();
     Port = config["UserConfig"]["Port"].as<string>();
+    Bitrate = config["UserConfig"]["Bitrate"].as<int>();
+    Resolution = config["UserConfig"]["Resolution"].as<int>();
     Emu = config["UserConfig"]["Emu"].as<int>();
     GameId = config["UserConfig"]["GameId"].as<int>();
     GPU = config["UserConfig"]["GPU"].as<bool>();

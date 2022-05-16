@@ -9,8 +9,8 @@ private:
     string file_config = "./config/config.yaml";
 
 public:
-    int Id, Emu, GameId;
-    string Port;
+    int Id, Bitrate, Resolution, Emu, GameId;
+    string IPaddress, Port;
     bool GPU;
     bool loadUserConfig();
 };

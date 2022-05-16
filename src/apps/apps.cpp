@@ -30,13 +30,20 @@ using namespace std;
 int main(int argc,char** argv) {
     Autoloader autoload;
     autoload.loadUserConfig();
+    // load confi
     int deviceID = autoload.Id;
-    string devicePort = autoload.Port;
-
+    string deviceIp = autoload.IPaddress;
+    string devicePort = autoload.Port; 
+    int bitrate = autoload.Bitrate;
+    int resolution = autoload.Resolution;
 
     Server server;
-    server.setDevice(deviceID, devicePort); // device id and port server
-    server.start_step();
+    server.setDevice(
+        deviceID, deviceIp, 
+        devicePort, bitrate, 
+        resolution
+    ); // setup Devices server
+    server.start_step(); // start server
     vector<string> device_list = server.getDevice_list();
     
     string deviceName = device_list[deviceID];

@@ -1,6 +1,12 @@
 UserConfig:
-  Id: 0
-  Port: "2000"
-  Emu: 0
-  GameId: 0
-  GPU: false
+  Id: 0 #default 0 You can check the list of devices 'adb devices' in terminal or cmd, counting the first device as Id 0.
+  IPaddress : "127.0.0.1" #default 127.0.0.1 ip loop back
+  Port: "2000" # default 2000 port
+  Bitrate: 100000000 # default 100000000
+  Resolution: 1280
+  Emu: 0 # 0:BlueStacks, 1:LDPlayer
+  GameId: 0 # ID Game
+  GPU: false # Use gpu processing for detection mode 
+
+#### Game list ####
+# 0 : ragnarok labyrinth nft
