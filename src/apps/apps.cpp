@@ -29,13 +29,12 @@ using namespace std;
 
 int main(int argc,char** argv) {
     Autoloader autoload;
-    
-    YAML::Node UserConfig;
+    autoload.loadUserConfig();
+    int deviceID = autoload.Id;
+    string devicePort = autoload.Port;
 
 
     Server server;
-    int deviceID = 0;
-    string devicePort = "2000";
     server.setDevice(deviceID, devicePort); // device id and port server
     server.start_step();
     vector<string> device_list = server.getDevice_list();

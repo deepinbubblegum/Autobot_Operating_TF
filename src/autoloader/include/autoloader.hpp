@@ -9,5 +9,8 @@ private:
     string file_config = "./config/config.yaml";
 
 public:
-    YAML::Node getUserConfig();
+    int Id, Emu, GameId;
+    string Port;
+    bool GPU;
+    bool loadUserConfig();
 };
