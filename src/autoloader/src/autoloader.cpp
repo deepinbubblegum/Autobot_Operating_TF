@@ -1,4 +1,7 @@
 #include <autoloader.hpp>
 
-    // YAML::Node config;
-    // config = YAML::LoadFile("./config/config.yaml");
+YAML::Node Autoloader::getUserConfig(){
+    YAML::Node config;
+    config = YAML::LoadFile(file_config);
+    return config["UserConfig"];
+}

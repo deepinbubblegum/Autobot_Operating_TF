@@ -1,5 +1,7 @@
-add_executable(autobuff apps.cpp)
+add_executable(autobuff src/apps.cpp)
+target_include_directories(autobuff PUBLIC include)
 target_link_libraries(autobuff server)
 target_link_libraries(autobuff stream)
 target_link_libraries(autobuff controller)
 target_link_libraries(autobuff autoloader)
+target_link_libraries(autobuff yaml-cpp)
