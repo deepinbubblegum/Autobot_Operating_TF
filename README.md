@@ -1,4 +1,4 @@
-example input
+#example input
 adb -s emulator-5554 shell sendevent /dev/input/event4 3 53 300
 adb -s emulator-5554 shell sendevent /dev/input/event4 3 54 400
 adb -s emulator-5554 shell sendevent /dev/input/event4 3 48 5
