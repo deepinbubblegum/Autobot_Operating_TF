@@ -1,4 +1,5 @@
-add_executable(autobuff apps.cpp)
+set(APP_ICON_RESOURCE_WINDOWS "${CMAKE_CURRENT_SOURCE_DIR}/appicon.rc")
+add_executable(autobuff apps.cpp ${APP_ICON_RESOURCE_WINDOWS})
 target_link_libraries(autobuff server)
 target_link_libraries(autobuff stream)
 target_link_libraries(autobuff controller)
