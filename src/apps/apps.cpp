@@ -28,8 +28,13 @@ using namespace std;
 //     return 0;
 // }
 
-int main(int, char**) {
-    YAML::Node config = YAML::LoadFile("config/config.yaml");
+int main(int argc,char** argv) {
+    YAML::Node config;
+    config = YAML::LoadFile("./config/config.yaml");
+    string emu = config["UserConfig"]["Emu"].as<string>();
+    cout << emu << endl;
+
+
     Server server;
     int deviceID = 0;
     string devicePort = "2000";

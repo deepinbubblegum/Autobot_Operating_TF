@@ -8,7 +8,7 @@ if(POLICY CMP0091)
 endif()
 
 project(YAML_CPP VERSION 0.7.0 LANGUAGES CXX)
-
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/test/bin")
 include(CMakePackageConfigHelpers)
 include(CMakeDependentOption)
 include(CheckCXXCompilerFlag)
