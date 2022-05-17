@@ -29,7 +29,7 @@ using namespace std;
 
 int main(int argc,char** argv) {
     Autoloader autoload;
-    autoload.loadUserConfig();
+    autoload.loadConfig();
     // load confi
     int deviceID = autoload.Id;
     string deviceIp = autoload.IPaddress;

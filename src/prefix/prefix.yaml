@@ -1,0 +1,3 @@
+touch_input: 
+  - "BlueStacks Virtual Touch" # BlueStacks
+  - "input" # LDPlayer
