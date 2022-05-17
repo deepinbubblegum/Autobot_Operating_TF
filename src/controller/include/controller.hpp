@@ -6,7 +6,9 @@ using namespace std;
 class Controller
 {
 private:
-    /* data */
+    void exec(string input);
+
 public:
-    void exec();
+    bool setCoordinates();
+    bool touch();
 };

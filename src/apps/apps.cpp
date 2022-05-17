@@ -30,13 +30,14 @@ using namespace std;
 int main(int argc,char** argv) {
     Autoloader autoload;
     autoload.loadConfig();
-    // load confi
+    // load config
     int deviceID = autoload.Id;
     string deviceIp = autoload.IPaddress;
     string devicePort = autoload.Port; 
     int bitrate = autoload.Bitrate;
     int resolution = autoload.Resolution;
 
+    // server stream image
     Server server;
     server.setDevice(
         deviceID, deviceIp, 
@@ -48,6 +49,8 @@ int main(int argc,char** argv) {
     
     string deviceName = device_list[deviceID];
     cout << "device target name :" << deviceName << endl;
+
+    // conntroller
     Controller ctl;
     ctl.exec();
 
