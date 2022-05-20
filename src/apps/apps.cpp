@@ -36,6 +36,7 @@ int main(int argc,char** argv) {
     string devicePort = autoload.Port; 
     int bitrate = autoload.Bitrate;
     int resolution = autoload.Resolution;
+    string deviceInput = autoload.devInput;
 
     // server stream image
     Server server;
@@ -52,7 +53,7 @@ int main(int argc,char** argv) {
 
     // conntroller
     Controller ctl;
-    ctl.exec();
+    ctl.test(deviceName);
 
     server.stop_device();
     return 0;

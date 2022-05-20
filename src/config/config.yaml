@@ -4,9 +4,13 @@ UserConfig:
   Port: "2000" # default 2000 port
   Bitrate: 100000000 # default 100000000
   Resolution: 1280
-  Emu: 0 # 0:BlueStacks, 1:LDPlayer
-  GameId: 0 # ID Game
+  Emu: 0 # ID emulator
+  GameId: 0 # ID game
   GPU: false # Use gpu processing for detection mode 
+
+#### Emulator list ####
+# 0: BlueStacks,
+# 1: LDPlayer
 
 #### Game list ####
 # 0 : ragnarok labyrinth nft

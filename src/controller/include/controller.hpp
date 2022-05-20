@@ -1,14 +1,15 @@
 #include <iostream>
 
-// Constant
-#define BUFSIZE 4096
 using namespace std;
 class Controller
 {
 private:
-    void exec(string input);
+    string exec_result;
+    string run_exec(string origin_cmd);
+    string findDeviceInput(string device);
 
 public:
+    void test(string input);
     bool setCoordinates();
     bool touch();
 };
